@@ -8,15 +8,53 @@
 Company.destroy_all
 # **************************
 
+# puts "There are #{Company.all.count} companies in the table."
 # - Insert, read, update, and delete rows in companies table
 #   (i.e. full CRUD of company data).
 
 # 1a. check out the schema file
 # 1b. check out the model file
 
+new_company = Company.new
+new_company["name"] = "Apple"
+new_company["city"] = "Cupertino"
+new_company["state"] = "CA"
+new_company["url"] = "apple.com"
+new_company.save
+
+puts "There are #{Company.all.count} companies in the table."
+
+
+
 # 2. insert new rows in companies table
+new_company_2 = Company.new
+new_company_2["name"] = "Amazon"
+new_company_2["city"] = "Seatle"
+new_company_2["state"] = "WA"
+new_company_2.save
+puts "Amazon created!" 
+
+puts "There are #{Company.all.count} companies in the table."
+
+puts Company.all.inspect
 
 # 3. query companies table to find all row with California company
+
+ca_companies = Company.where ({ "state" => "CA" })
+puts ca_companies.inspect
+
+# Functional equivalent of SELECT * FROM companies WHERE name = "Apple" LIMIT 1;
+# apple = Company.find_by ({"name"=>"Apple","states" => "CA"})
+apple = Company.find_by ({"name" => "Apple"})
+apple ["name"] = "Apple Computer, Inc"
+apple.save
+puts apple.inspect
+
+twitter = Company.new
+twitter["name"] = "Twitter, Inc"
+twitter.save
+
+twitter.destroy
 
 # 4. query companies table to find single row for Apple
 
